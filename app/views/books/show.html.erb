@@ -1,0 +1,68 @@
+<% if flash[:notice] %>
+<p id="notice">
+	<%= flash[:notice] %>
+</p>
+<% end %>
+<div class="body">
+	<div class="container">
+		<p id="notice"></p>
+		<div class="row">
+			<div class="col-xs-3">
+				<h2>User info</h2>
+				<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "attachment user profile_image fallback", fallback: "no_image.jpg"%>
+				<table class="table">
+					<tbody>
+						<tr></tr>
+						<tr>
+							<th>name</th>
+							<th><%= @user.name %></th>
+						</tr>
+						<tr>
+							<th>introduction</th>
+							<th><%= @user.introduction %></th>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row">
+					<% if @user.id == current_user.id %>
+					<%= link_to "", edit_user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_12040"%>
+					<% else %>
+					<%= link_to "", user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_12040"%>
+					<% end %>
+				</div>
+				
+				<h2>New book</h2>
+				<%= form_for(@book) do |f| %>
+				<h4>Title</h4>
+				<%= f.text_field :title %>
+				<h4>Body</h4>
+				<%= f.text_area :body %>
+				<p></p>
+				<%= f.submit 'Create Book' %>
+
+				<% end %>
+			</div>
+			<div class="col-xs-9">
+				<h2>Book detail</h2>
+				<table class="table">
+					<% @books.each do |book| %>
+					<tbody>
+						<tr>
+							<th>
+								<%= link_to attachment_image_tag(book.user, :profile_image, :fill, 60,60),user_path(book.user_id) %><br>
+								<%= link_to book.user.name,user_path(book.user_id) %>
+							</th>
+							<td><%= book.title %></td>
+							<td><%= book.body %></td>
+							<% if book.user_id == current_user.id %>
+							<td><%= link_to "Edit", edit_book_path(book),class:"btn-sm btn-success edit_book_19082" %></td>
+							<td><%= link_to "Destroy", book_path(book),method: :delete,class:"btn-sm btn-danger destroy_book_19082", "data-confirm" => "本当に削除しますか？"%></td>
+							<% end %>
+						</tr>
+					</tbody>
+					<% end %>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

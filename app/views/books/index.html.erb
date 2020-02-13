@@ -1,0 +1,72 @@
+<% if flash[:alert] %>
+<p id="alert">
+	<%= flash[:alert] %>
+</p>
+<% end %>
+
+<div class="body">
+	<div class="container">
+		<p id="notice"></p>
+		<div class="row">
+			<div class="col-xs-3">
+				<h2>User info</h2>
+				<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "attachment user profile_image fallback", fallback: "no_image.jpg"%>
+				<table class="table">
+					<tbody>
+						<tr></tr>
+						<tr>
+							<th>name</th>
+							<th><%= @user.name %></th>
+						</tr>
+						<tr>
+							<th>introduction</th>
+							<th><%= @user.introduction %></th>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row">
+					<% if @user.id == current_user.id %>
+					<%= link_to "", edit_user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_12040"%>
+					<% else %>
+					<%= link_to "", user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_12040"%>
+					<% end %>
+				</div>
+				
+				<h2>New book</h2>
+				<%= form_for(@book) do |f| %>
+				<h4>Title</h4>
+				<%= f.text_field :title %>
+				<h4>Body</h4>
+				<%= f.text_area :body %>
+				<p></p>
+				<%= f.submit 'Create Book' %>
+
+				<% end %>
+			</div>
+			<div class="col-xs-9">
+				<h2>Books</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th></th>
+                        	<th>Title</th>
+                        	<th>Opinion</th>
+                        	<th colspan="3"></th>
+						</tr>
+					</thead>
+					<% @books.each do |book| %>
+					<tbody>
+						<tr>
+							<th>
+								<%= link_to attachment_image_tag(book.user, :profile_image, :fill, 60,60),user_path(book.user_id) %>
+							</th>
+							<th><%= link_to book.title, book_path(book) %></th>
+							<th><%= book.body %></th>
+						</tr>
+					</tbody>
+					<% end %>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
