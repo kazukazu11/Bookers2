@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="col-xs-3">
 				<h2>User info</h2>
-				<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "attachment user profile_image fallback", fallback: "no_image.jpg"%>
+				<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "attachment user profile_image fallback", fallback: "no_image.jpg", size:'60x60'%>
 				<table class="table">
 					<tbody>
 						<tr></tr>
@@ -59,7 +59,7 @@
 					<tbody>
 						<% @users.each do |user| %>
 						<tr>
-							<td><%= attachment_image_tag user, :profile_image, :fill, 60, 60, class: "attachment user profile_image fallback", fallback: "no_image.jpg"%>
+							<td><%= attachment_image_tag user, :profile_image, :fill, 60, 60, class: "attachment user profile_image fallback", fallback: "no_image.jpg", size:'60x60'%>
 							</td>
 							<td>
 								<%= user.name %>

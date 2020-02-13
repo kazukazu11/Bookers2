@@ -20,8 +20,7 @@ class UsersController < ApplicationController
         flash[:notice] = "You have updated user successfully."
         redirect_to user_path(@user)
     else
-        flash[:notice] = "error"
-        redirect_to user_path(@user)
+        render :edit
     end
   end
 # current_user.id==現在、ログイン中のID

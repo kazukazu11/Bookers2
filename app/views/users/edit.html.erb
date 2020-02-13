@@ -1,6 +1,13 @@
 <div class='body'>
 	<div class='container'>
-		<p id="notice"></p>
+		<% if @user.errors.any? %>
+		<h3><%= @user.errors.count %>errors prohibited this obj from being saved:</h3>
+		<ul>
+			<% @user.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+			<% end %>
+		</ul>
+		<% end %>
 		<h2>User info</h2>
 		<%= form_for (@user) do |f| %>
 			<div class="field">
