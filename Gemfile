@@ -50,6 +50,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
   gem 'letter_opener_web'
+  gem 'bullet'
 end
 
 group :test do
@@ -82,3 +83,5 @@ gem 'devise-i18n'
 gem 'devise-i18n-views'
 
 gem 'acts-as-taggable-on', '~> 6.0'
+
+gem 'ransack'

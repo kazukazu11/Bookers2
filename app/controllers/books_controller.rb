@@ -13,10 +13,16 @@ class BooksController < ApplicationController
 		end
 	end
 	def index
-		@books = Book.all
+		@book_data = Book.ransack(params[:q])
+		@books = @book_data.result(distinct: true).includes(:taggings,:user)
 		@user = current_user
 		@book = Book.new
 	end
+
+	def search
+    	@book = Book.search(search_params)
+    	@books = @book.result(distinct: true).includes(:taggings,:user)
+  	end
 
 	def show
 		@user = Book.find(params[:id]).user
@@ -42,6 +48,9 @@ class BooksController < ApplicationController
         redirect_to books_path
     end
 	private
+	def search_params
+    	params.require(:q).permit(:title_cont, :body_cont)
+  	end
     def book_params
         params.require(:book).permit(:title, :body, :user_id,:tag_list)
     end

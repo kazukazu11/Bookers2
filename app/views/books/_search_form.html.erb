@@ -1,0 +1,11 @@
+<%= search_form_for(book, url:search_path) do |f| %>
+
+<%= f.label :title_cont, 'タイトル' %>
+<%= f.search_field :title_cont %><br>
+
+<%= f.label :body_cont, 'ボディ' %>
+<%= f.search_field :body_cont %><br>
+
+<%= f.submit %>
+
+<% end %>
