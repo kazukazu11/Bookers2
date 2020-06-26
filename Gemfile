@@ -80,3 +80,5 @@ end
 
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+
+gem 'acts-as-taggable-on', '~> 6.0'

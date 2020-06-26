@@ -45,6 +45,8 @@
 				<%= f.text_field :title %>
 				<h4>Body</h4>
 				<%= f.text_area :body %>
+				<h4><%= f.label :tag_list %></h4>
+				<%= f.text_field :tag_list, value: f.object.tag_list.to_s %>
 				<p></p>
 				<%= f.submit 'Create Book' %>
 
@@ -67,6 +69,7 @@
 							<th>
 								<%= link_to attachment_image_tag(book.user, :profile_image, :fill, 60,60, class: "attachment user profile_image fallback", fallback: "no_image.jpg", size:'60x60'),user_path(book.user_id) %>
 							</th>
+							<th><%= book.tag_list.map { |tag| "##{tag}" }.join(' ') %></th>
 							<th><%= link_to book.title, book_path(book) %></th>
 							<th><%= book.body %></th>
 						</tr>
