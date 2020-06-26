@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   root :to => 'homes#home'
   get 'home/about' => 'homes#about'
 
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: '/letter_opener'
+  end
+
   resources :books, only: [:create, :show, :index, :edit, :update, :destroy]
   resources :users, only: [:show, :edit, :update, :index]
 end
